@@ -1,0 +1,454 @@
+<!doctype HTML>
+<html>
+<head>
+	<title>TEdu</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="js/lib/jquery-ui/jquery-ui.structure.min.css" />
+	<link rel="stylesheet" type="text/css" href="js/lib/jquery-ui/jquery-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+	<script type="text/javascript" src="js/lib/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/lib/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/lib/underscore-min.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.mask.min.js"></script>
+	<script type="text/javascript" src="js/lib/moment.min.js"></script>
+	<script type="text/javascript" src="js/lib/socket.io.js"></script>
+
+
+	<script type="text/javascript">
+		var socket = io('http://127.0.0.1:3000');
+
+		$.fn.getForm = function(){
+			var obj = {};
+			$(this).find("[persist]").each(function(){
+				if($(this).attr("type") == "checkbox"){
+					if($(this).is(":checked")){
+						obj[$(this).attr("name")] = $(this).val();
+					}
+				}else if($(this).attr("type") == "radio"){
+					if($(this).is(":checked")){
+						obj[$(this).attr("name")] = $(this).val();
+					}
+				}else{
+					obj[$(this).attr("name")] = $(this).val() || $(this).attr("data-value");
+				}
+			});
+			return obj;
+		};
+
+		$(document).ready(function(){
+
+			$('#create-users').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'createUserClassroom',
+					data: {id: 1}
+				});
+			});
+
+			$('#delete-users').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'deleteUserClassroom',
+					data: {}
+				});
+			});
+
+			$('#listing-users').click(function () {
+				// var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'listingUserClassroom',
+					data: {}
+				});
+			});
+
+			$('#update-users').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'updateUserClassroom',
+					data: data
+				});
+			});
+
+			$('#div-listing-users').delegate('a', 'click', function () {
+				console.log();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'deleteUserClassroomById',
+					data: {id: $(this).data('id')}
+				});
+			});
+
+
+
+
+
+
+
+
+
+
+			$('#create-courses').click(function () {
+				alert('Create Courses blocked');
+				// var data = $('form').getForm();
+				// socket.emit('execute', {
+				// 	cls: 'school',
+				// 	action: 'getAllOpenClassesByIdSchool',
+				// 	data: {id: 1}
+				// });
+			});
+
+			$('#delete-courses').click(function () {
+				alert('Delete Courses blocked');
+				// var data = $('form').getForm();
+				// socket.emit('execute', {
+				// 	cls: 'googleClassroom',
+				// 	action: 'deleteCourseClassroom',
+				// 	data: {}
+				// });
+			});
+
+			$('#listing-courses').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'listingCourseClassroom',
+					data: {}
+				});
+			});
+
+
+
+
+
+
+
+
+			$('#create-teachers').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'createTeacherClassroom',
+					data: {id: 1}
+				});
+			});
+
+			$('#delete-teachers').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'deleteTeacherClassroom',
+					data: {}
+				});
+			});
+
+			$('#listing-teachers').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'listingTeacherClassroom',
+					data: {}
+				});
+			});
+
+
+
+
+
+
+			
+
+
+
+			$('#create-students').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'createStudentClassroomList',
+					data: {id: 1}
+				});
+			});
+
+			$('#delete-students').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'deleteStudentClassroom',
+					data: {}
+				});
+			});
+
+			$('#listing-students').click(function () {
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'listingStudentClassroom',
+					data: {}
+				});
+			});
+
+
+
+
+
+
+
+
+		});
+
+
+
+
+
+
+
+		socket.on('log', function (data) {
+			console.log(data);
+		});
+
+
+
+
+
+
+
+
+
+
+		socket.on('createUserClassroom', function (data) {
+			console.log(data);
+		});
+
+		socket.on('deleteUserClassroom', function (data) {
+			console.log(data);
+		});
+
+		socket.on('listingUserClassroom', function (data) {
+			console.log(data);
+			var users = data.users;
+			var listing = $('#div-listing-users');
+			var tpl = '';
+
+			for (var i = 0; i < users.length; i++) {
+				tpl += `<tr><td>${users[i].name.fullName}</td>
+				<td>${users[i].primaryEmail}</td>
+				<td><a data-id="${users[i].id}"> X </a></td></tr>`;
+			}
+			listing.html('<table><tr><th>Name</th><th>E-mail</th><th></th></tr>' + tpl + '</table>');
+			console.log(users);
+		});
+
+		socket.on('updateUserClassroom', function (data) {
+			console.log(data);
+			$('.form-users').find('input').each(function () {
+				$(this).val(null);
+			});
+			$('#div-listing-users').html('');
+			// $('#listing-users').trigger('click');
+			alert(data.message);
+		});
+
+		socket.on('deleteUserClassroomById', function (data) {
+			console.log(data);
+			$('.form-users').find('input').each(function () {
+				$(this).val(null);
+			});
+			$('#div-listing-users').html('');
+			// $('#listing-users').trigger('click');
+			alert(data.message);
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+
+		socket.on('createCourseClassroom', function (data) {
+			console.log(data);
+		});
+
+		socket.on('deleteCourseClassroom', function (data) {
+			console.log(data);
+		});
+
+		socket.on('listingCourseClassroom', function (data) {
+			console.log(data);
+			var courses = data.courses;
+			var listing = $('#listing');
+			var tpl = '';
+
+			for (var i = 0; i < courses.length; i++) {
+				tpl += `<tr><td>${courses[i].id}</td>
+				<td>${courses[i].name}</td></tr>`;
+			}
+			listing.html('<table><tr><th>ID</th><th>Name</th></tr>' + tpl + '</table>');
+			console.log(courses);
+		});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		socket.on('createTeacherClassroom', function (data) {
+			console.log(data);
+		});
+
+		socket.on('deleteTeacherClassroom', function (data) {
+			console.log(data);
+		});
+
+		socket.on('listingTeacherClassroom', function (data) {
+			console.log(data);
+			var teachers = data.teachers;
+			var listing = $('#listing');
+			var tpl = '';
+
+			for (var i = 0; i < teachers.length; i++) {
+				tpl += `<tr><td>${teachers[i].id}</td>
+				<td>${teachers[i].name}</td></tr>`;
+			}
+			listing.html('<table><tr><th>ID</th><th>Name</th></tr>' + tpl + '</table>');
+			console.log(teachers);
+		});
+
+
+
+
+
+
+
+
+
+
+		socket.on('createStudentClassroom', function (data) {
+			console.log(data);
+		});
+
+
+
+
+
+
+
+
+	</script>
+</head>
+<body>
+	<form>
+		<fieldset class="form-control form-users">
+			<legend>Users</legend>
+
+			<div class="form-group">
+				<label for="">E-mail Google: </label>
+				<span><input type="text" name="googleEmail" persist></span>
+				<label for="">Given Name: </label>
+				<span><input type="text" name="givenName" persist></span>
+				<label for="">Family Name: </label>
+				<span><input type="text" name="familyName" persist></span>
+			</div>
+			<div class="buttons">
+				<a class="btn btn-danger" id="delete-users">Delete Users</a>
+				<a class="btn btn-info" id="listing-users">Listing Users</a>
+				<a class="btn btn-success" id="create-users">Create Users</a>
+				<a class="btn btn-warning" id="update-users">Update Users</a>
+			</div>
+
+			<div class="listing" id="div-listing-users"></div>
+
+		</fieldset>
+
+
+
+
+
+
+
+
+		<fieldset class="form-control form-courses">
+			<legend>Courses</legend>
+
+			<div class="form-group">
+				<label for="">Text Box: </label>
+				<span><input type="text" name="txtBox" persist></span>
+			</div>
+			<div class="buttons">
+				<a class="btn btn-danger" id="delete-courses">Delete Courses</a>
+				<a class="btn btn-info" id="listing-courses">Listing Courses</a>
+				<a class="btn btn-success" id="create-courses">Create Courses</a>
+				<a class="btn btn-warning" id="create-courses">Update Courses</a>
+			</div>
+
+		</fieldset>
+
+
+
+
+
+
+
+
+		<fieldset class="form-control form-teachers">
+			<legend>Teachers</legend>
+
+			<div class="form-group">
+				<label for="">Text Box: </label>
+				<span><input type="text" name="txtBox" persist></span>
+			</div>
+			<div class="buttons">
+				<a class="btn btn-danger" id="delete-teachers">Delete Teachers</a>
+				<a class="btn btn-info" id="listing-teachers">Listing Teachers</a>
+				<a class="btn btn-success" id="create-teachers">Create Teachers</a>
+				<a class="btn btn-warning" id="create-teachers">Update Teachers</a>
+			</div>
+
+		</fieldset>
+
+
+
+
+
+
+
+
+		<fieldset class="form-control form-students">
+			<legend>Students</legend>
+
+			<div class="form-group">
+				<label for="">Text Box: </label>
+				<span><input type="text" name="txtBox" persist></span>
+			</div>
+			<div class="buttons">
+				<a class="btn btn-danger" id="delete-students">Delete Students</a>
+				<a class="btn btn-info" id="listing-students">Listing Students</a>
+				<a class="btn btn-success" id="create-students">Create Students</a>
+				<a class="btn btn-warning" id="update-students">Update Students</a>
+			</div>
+
+		</fieldset>
+
+	</form>
+</body>
+</html>
