@@ -1493,7 +1493,7 @@ form .form-control {
     border: 1px solid #000;
     border-radius: 10px;
     margin-bottom: 50px;
-    padding: 50px;
+    padding: 50px 100px;
 }
 
 form .form-group {
@@ -1536,10 +1536,11 @@ input[type=text] {
     border: solid 1px #999;
     border-radius: 5px;
     height: 25px;
+    margin-bottom: 10px;
 }
 
 .buttons {
-    text-align: center;
+    text-align: right;
 }
 
 .btn {
