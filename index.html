@@ -121,13 +121,13 @@
 			});
 
 			$('#delete-courses').click(function () {
-				alert('Delete Courses blocked');
-				// var data = $('form').getForm();
-				// socket.emit('execute', {
-				// 	cls: 'googleClassroom',
-				// 	action: 'deleteCourseClassroom',
-				// 	data: {}
-				// });
+				// alert('Delete Courses blocked');
+				var data = $('form').getForm();
+				socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'deleteCourseClassroomList',
+					data: {}
+				});
 			});
 
 			$('#listing-courses').click(function () {
@@ -305,14 +305,14 @@
 			console.log(data);
 		});
 
-		socket.on('deleteCourseClassroom', function (data) {
+		socket.on('deleteCourseClassroomList', function (data) {
 			console.log(data);
 		});
 
 		socket.on('listingCourseClassroom', function (data) {
 			console.log(data);
 			var courses = data.courses;
-			var listing = $('#listing');
+			var listing = $('#div-listing-courses');
 			var tpl = '';
 
 			for (var i = 0; i < courses.length; i++) {
@@ -458,6 +458,8 @@
 				<a class="btn btn-warning" id="create-courses">Update Courses</a>
 				<a class="btn btn-success" id="create-courses">Create Courses</a>
 			</div>
+
+			<div class="listing" id="div-listing-courses"></div>
 
 		</fieldset>
 
