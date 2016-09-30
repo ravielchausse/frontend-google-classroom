@@ -92,14 +92,14 @@
 				});
 			});
 
-			$('#div-listing-users').delegate('a', 'click', function () {
-				console.log();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'deleteUserClassroomById',
-					data: {id: $(this).data('id')}
-				});
-			});
+			// $('#div-listing-users').delegate('a', 'click', function () {
+			// 	console.log();
+			// 	socket.emit('execute', {
+			// 		cls: 'googleClassroom',
+			// 		action: 'deleteUserClassroomById',
+			// 		data: {id: $(this).data('id')}
+			// 	});
+			// });
 
 
 
@@ -265,7 +265,14 @@
 				<td>${users[i].primaryEmail}</td>
 				<td><a data-id="${users[i].id}"> X </a></td></tr>`;
 			}
-			listing.html('<table><tr><th>Name</th><th>E-mail</th><th></th></tr>' + tpl + '</table>');
+			listing.html('<table><tr><th>Name</th><th>E-mail</th><th></th></tr>' + tpl + '</table>').find('a').click(function () {
+				console.log({id: $(this).data('id')});
+				// socket.emit('execute', {
+				// 	cls: 'googleClassroom',
+				// 	action: 'deleteUserClassroomById',
+				// 	data: {id: $(this).data('id')}
+				// });
+			});
 			console.log(users);
 		});
 
@@ -395,9 +402,12 @@
 
 	</script>
 </head>
-<body>
+<body id="all">
+	<div class="classroom">
+		<img src="img/ravies-classroom.png" alt="Google Classroom">
+	</div>
 	<form>
-
+		
 		<fieldset class="form-control form-classes">
 			<legend>Classes</legend>
 
