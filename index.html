@@ -61,7 +61,7 @@
 				socket.emit('execute', {
 					cls: 'googleClassroom',
 					action: 'createUserClassroom',
-					data: {id: 1}
+					data: data
 				});
 			});
 
@@ -228,8 +228,10 @@
 			console.log(data);
 		});
 
-
-
+		socket.on('Exceptions', function (data) {
+			console.log(data);
+			alert('Code: ' + data.exception.code + ' Message: ' + data.exception.exceptionMessage);
+		});
 
 
 
