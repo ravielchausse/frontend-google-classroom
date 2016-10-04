@@ -1,5 +1,5 @@
 'use strict';
-$scripts.courses.listing = {
+$scripts.students.listing = {
 	events: function () {
 		$('#listing-students').click(function () {
 			var data = $('form').getForm();

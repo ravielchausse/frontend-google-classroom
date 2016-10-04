@@ -2,7 +2,6 @@
 $scripts.courses.listing = {
 	events: function () {
 		$('#listing-courses').click(function () {
-			var data = $('form').getForm();
 			$socket.emit('execute', {
 				cls: 'googleClassroom',
 				action: 'listingCourseClassroom',

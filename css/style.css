@@ -226,8 +226,8 @@ nav{
 	top: 3px;
 	bottom: 0;
 	left: 0;
-	padding-left: 15px;
-	width: 220px;
+	padding-left: 5px;
+	width: 250px;
 	background-color: #414141;
 	list-style: none;
 	overflow: auto;
@@ -447,7 +447,7 @@ nav li ul li a::before{
 /* formulários */
 
 form {
-	width: 60%;
+	width: 70%;
 	position: absolute;
 	left: 250px;
 }
@@ -518,6 +518,19 @@ form h1 span::before{
 
 }
 
+.classroom-nav {
+	text-align: center;
+	margin: 0 auto;
+	width: 75%;
+	border-radius: 10px;
+}
+
+.classroom-nav img {
+	width: 150px;
+	padding: 0px;
+}
+
+
 .classroom {
 	text-align: center;
 	margin: 0 auto;
@@ -528,8 +541,6 @@ form h1 span::before{
 }
 
 .classroom img {
-	text-align: center;
-	margin: 0 auto;
 	width: 250px;
 	padding: 10px;
 }
