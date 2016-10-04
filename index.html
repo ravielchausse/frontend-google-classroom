@@ -17,510 +17,103 @@
 	<script type="text/javascript" src="js/lib/moment.min.js"></script>
 	<script type="text/javascript" src="js/lib/socket.io.js"></script>
 
+	<script type="text/javascript" src="js/factory.js"></script>
+
+	<script type="text/javascript" src="js/modules/form.js"></script>
+	<script type="text/javascript" src="js/modules/load.js"></script>
+	<script type="text/javascript" src="js/modules/nav.js"></script>
+
+	<script type="text/javascript" src="js/modules/classes/finalize.js"></script>
+
+	<script type="text/javascript" src="js/modules/users/create.js"></script>
+	<script type="text/javascript" src="js/modules/users/delete.js"></script>
+	<script type="text/javascript" src="js/modules/users/listing.js"></script>
+	<script type="text/javascript" src="js/modules/users/update.js"></script>
+	
+	<script type="text/javascript" src="js/modules/courses/create.js"></script>
+	<script type="text/javascript" src="js/modules/courses/delete.js"></script>
+	<script type="text/javascript" src="js/modules/courses/listing.js"></script>
+	<script type="text/javascript" src="js/modules/courses/update.js"></script>
+
+	<script type="text/javascript" src="js/modules/teachers/create.js"></script>
+	<script type="text/javascript" src="js/modules/teachers/delete.js"></script>
+	<script type="text/javascript" src="js/modules/teachers/listing.js"></script>
+	<script type="text/javascript" src="js/modules/teachers/update.js"></script>
+
+	<script type="text/javascript" src="js/modules/students/create.js"></script>
+	<script type="text/javascript" src="js/modules/students/delete.js"></script>
+	<script type="text/javascript" src="js/modules/students/listing.js"></script>
+	<script type="text/javascript" src="js/modules/students/update.js"></script>
 
 	<script type="text/javascript">
-		var socket = io('http://127.0.0.1:3000');
-
-		$.fn.getForm = function(){
-			var obj = {};
-			$(this).find("[persist]").each(function(){
-				if($(this).attr("type") == "checkbox"){
-					if($(this).is(":checked")){
-						obj[$(this).attr("name")] = $(this).val();
-					}
-				}else if($(this).attr("type") == "radio"){
-					if($(this).is(":checked")){
-						obj[$(this).attr("name")] = $(this).val();
-					}
-				}else{
-					obj[$(this).attr("name")] = $(this).val() || $(this).attr("data-value");
-				}
-			});
-			return obj;
-		};
-
 		$(document).ready(function(){
 
-			$('#finalize-classes').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'classes',
-					action: 'finalizeClassById',
-					data: data
-				});
-			});
-
-
-
-
-
-
-
-			$('#create-users').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'createUserClassroom',
-					data: data
-				});
-			});
-
-			$('#delete-users').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'deleteUserClassroom',
-					data: {}
-				});
-			});
-
-			$('#listing-users').click(function () {
-				// var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'listingUserClassroom',
-					data: {}
-				});
-			});
-
-			$('#update-users').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'updateUserClassroom',
-					data: data
-				});
-			});
-
-			// $('#div-listing-users').delegate('a', 'click', function () {
-			// 	console.log();
-			// 	socket.emit('execute', {
-			// 		cls: 'googleClassroom',
-			// 		action: 'deleteUserClassroomById',
-			// 		data: {id: $(this).data('id')}
-			// 	});
-			// });
-
-
-
-
-
-
-
-
-
-
-			$('#create-courses').click(function () {
-				alert('Create Courses blocked');
-				// var data = $('form').getForm();
-				// socket.emit('execute', {
-				// 	cls: 'school',
-				// 	action: 'getAllOpenClassesByIdSchool',
-				// 	data: {id: 1}
-				// });
-			});
-
-			$('#delete-courses').click(function () {
-				// alert('Delete Courses blocked');
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'deleteCourseClassroomList',
-					data: {}
-				});
-			});
-
-			$('#listing-courses').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'listingCourseClassroom',
-					data: {}
-				});
-			});
-
-
-
-
-
-
-
-
-			$('#create-teachers').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'createTeacherClassroom',
-					data: {id: 1}
-				});
-			});
-
-			$('#delete-teachers').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'deleteTeacherClassroom',
-					data: {}
-				});
-			});
-
-			$('#listing-teachers').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'listingTeacherClassroom',
-					data: {}
-				});
-			});
-
-
-
-
-
-
-			
-
-
-
-			$('#create-students').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'createStudentClassroomList',
-					data: {id: 1}
-				});
-			});
-
-			$('#delete-students').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'deleteStudentClassroom',
-					data: {}
-				});
-			});
-
-			$('#listing-students').click(function () {
-				var data = $('form').getForm();
-				socket.emit('execute', {
-					cls: 'googleClassroom',
-					action: 'listingStudentClassroom',
-					data: {}
-				});
-			});
-
-
-
-
-
-
-
-
 		});
-
-
-
-
-
-
-
-		socket.on('log', function (data) {
-			console.log(data);
-		});
-
-		socket.on('Exceptions', function (data) {
-			console.log(data);
-			alert('Code: ' + data.exception.code + ' Message: ' + data.exception.exceptionMessage);
-		});
-
-
-
-
-		socket.on('finalizeClassById', function (data) {
-			console.log(data);
-		});
-
-
-
-
-
-
-
-
-
-		socket.on('createUserClassroom', function (data) {
-			console.log(data);
-		});
-
-		socket.on('deleteUserClassroom', function (data) {
-			console.log(data);
-		});
-
-		socket.on('listingUserClassroom', function (data) {
-			console.log(data);
-			var users = data.users;
-			var listing = $('#div-listing-users');
-			var tpl = '';
-
-			for (var i = 0; i < users.length; i++) {
-				tpl += `<tr><td>${users[i].name.fullName}</td>
-				<td>${users[i].primaryEmail}</td>
-				<td><a data-id="${users[i].id}"> X </a></td></tr>`;
-			}
-			listing.html('<table><tr><th>Name</th><th>E-mail</th><th></th></tr>' + tpl + '</table>').find('a').click(function () {
-				console.log({id: $(this).data('id')});
-				// socket.emit('execute', {
-				// 	cls: 'googleClassroom',
-				// 	action: 'deleteUserClassroomById',
-				// 	data: {id: $(this).data('id')}
-				// });
-			});
-			console.log(users);
-		});
-
-		socket.on('updateUserClassroom', function (data) {
-			console.log(data);
-			$('.form-users').find('input').each(function () {
-				$(this).val(null);
-			});
-			$('#div-listing-users').html('');
-			// $('#listing-users').trigger('click');
-			alert(data.message);
-		});
-
-		socket.on('deleteUserClassroomById', function (data) {
-			console.log(data);
-			$('.form-users').find('input').each(function () {
-				$(this).val(null);
-			});
-			$('#div-listing-users').html('');
-			// $('#listing-users').trigger('click');
-			alert(data.message);
-		});
-
-
-
-
-
-
-
-
-
-
-
-
-
-		socket.on('createCourseClassroom', function (data) {
-			console.log(data);
-		});
-
-		socket.on('deleteCourseClassroomList', function (data) {
-			console.log(data);
-		});
-
-		socket.on('listingCourseClassroom', function (data) {
-			console.log(data);
-			var courses = data.courses;
-			var listing = $('#div-listing-courses');
-			var tpl = '';
-
-			for (var i = 0; i < courses.length; i++) {
-				tpl += `<tr><td>${courses[i].id}</td>
-				<td>${courses[i].name}</td></tr>`;
-			}
-			listing.html('<table><tr><th>ID</th><th>Name</th></tr>' + tpl + '</table>');
-			console.log(courses);
-		});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		socket.on('createTeacherClassroom', function (data) {
-			console.log(data);
-		});
-
-		socket.on('deleteTeacherClassroom', function (data) {
-			console.log(data);
-		});
-
-		socket.on('listingTeacherClassroom', function (data) {
-			console.log(data);
-			var teachers = data.teachers;
-			var listing = $('#listing');
-			var tpl = '';
-
-			for (var i = 0; i < teachers.length; i++) {
-				tpl += `<tr><td>${teachers[i].id}</td>
-				<td>${teachers[i].name}</td></tr>`;
-			}
-			listing.html('<table><tr><th>ID</th><th>Name</th></tr>' + tpl + '</table>');
-			console.log(teachers);
-		});
-
-
-
-
-
-
-
-
-
-
-		socket.on('createStudentClassroom', function (data) {
-			console.log(data);
-		});
-
-		socket.on('updateStudentClassroom', function (data) {
-			console.log(data);
-		});
-
-		socket.on('deleteStudentClassroom', function (data) {
-			console.log(data);
-		});
-
-		socket.on('listingStudentClassroom', function (data) {
-			console.log(data);
-		});
-
-		socket.on('createStudentClassroomList', function (data) {
-			console.log(data);
-		});
-
-
-
-
-
-
-
 	</script>
+
 </head>
-<body id="all">
-	<div class="classroom">
-		<img src="img/ravies-classroom.png" alt="Google Classroom">
+<body>
+	<div id="all">
+
+		<nav>
+			<ul class="no-bullets">
+				<li>
+					<a href="index.html">Home</a>
+				</li>
+				<li><a href="#">Classes</a>
+					<ul>
+						<li><a href="template/classes/finalize.html" data-cls="classes" data-script="finalize">Finalize</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Users</a>
+					<ul>
+						<li><a href="template/users/create.html" data-cls="users" data-script="create">Create</a></li>
+						<li><a href="template/users/listing.html" data-cls="users" data-script="listing">Listing</a></li>
+						<li><a href="template/users/update.html" data-cls="users" data-script="update">Update</a></li>
+						<li><a href="template/users/delete.html" data-cls="users" data-script="delete">Delete</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Courses</a>
+					<ul>
+						<li><a href="template/courses/create.html" data-cls="courses" data-script="create">Create</a></li>
+						<li><a href="template/courses/listing.html" data-cls="courses" data-script="listing">Listing</a></li>
+						<li><a href="template/courses/update.html" data-cls="courses" data-script="update">Update</a></li>
+						<li><a href="template/courses/delete.html" data-cls="courses" data-script="delete">Delete</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Teachers</a>
+					<ul>
+						<li><a href="template/teachers/create.html" data-cls="teachers" data-script="create">Create</a></li>
+						<li><a href="template/teachers/listing.html" data-cls="teachers" data-script="listing">Listing</a></li>
+						<li><a href="template/teachers/update.html" data-cls="teachers" data-script="update">Update</a></li>
+						<li><a href="template/teachers/delete.html" data-cls="teachers" data-script="delete">Delete</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Students</a>
+					<ul>
+						<li><a href="template/students/create.html" data-cls="students" data-script="create">Create</a></li>
+						<li><a href="template/students/listing.html" data-cls="students" data-script="listing">Listing</a></li>
+						<li><a href="template/students/update.html" data-cls="students" data-script="update">Update</a></li>
+						<li><a href="template/students/delete.html" data-cls="students" data-script="delete">Delete</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+
+		<form>
+			<div id="load">
+				<div class="classroom">
+					<img src="img/ravies-classroom.png" alt="Google Classroom">
+				</div>
+				<div class="form-group">
+					<label for="">Search: </label>
+					<span><input type="text" name="search" persist></span>
+				</div>
+				<div class="buttons">
+					<a class="btn btn-success" id="search">Search</a>
+				</div>
+			</div>
+		</form>
 	</div>
-	<form>
-		
-		<fieldset class="form-control form-classes">
-			<legend>Classes</legend>
-
-			<div class="form-group">
-				<label for="">ID Class: </label>
-				<span><input type="text" name="id" persist></span>
-			</div>
-			<div class="buttons">
-				<a class="btn btn-success" id="finalize-classes">Finalize Class</a>
-			</div>
-
-		</fieldset>
-
-
-
-
-
-
-		<fieldset class="form-control form-users">
-			<legend>Users</legend>
-
-			<div class="form-group">
-				<label for="">E-mail Google: </label>
-				<span><input type="text" name="googleEmail" persist></span>
-				<label for="">Given Name: </label>
-				<span><input type="text" name="givenName" persist></span>
-				<label for="">Family Name: </label>
-				<span><input type="text" name="familyName" persist></span>
-			</div>
-			<div class="buttons">
-				<a class="btn btn-danger" id="delete-users">Delete Users</a>
-				<a class="btn btn-info" id="listing-users">Listing Users</a>
-				<a class="btn btn-warning" id="update-users">Update Users</a>
-				<a class="btn btn-success" id="create-users">Create Users</a>
-			</div>
-
-			<div class="listing" id="div-listing-users"></div>
-
-		</fieldset>
-
-
-
-
-
-
-
-
-		<fieldset class="form-control form-courses">
-			<legend>Courses</legend>
-
-			<div class="form-group">
-				<label for="">Text Box: </label>
-				<span><input type="text" name="txtBox" persist></span>
-			</div>
-			<div class="buttons">
-				<a class="btn btn-danger" id="delete-courses">Delete Courses</a>
-				<a class="btn btn-info" id="listing-courses">Listing Courses</a>
-				<a class="btn btn-warning" id="create-courses">Update Courses</a>
-				<a class="btn btn-success" id="create-courses">Create Courses</a>
-			</div>
-
-			<div class="listing" id="div-listing-courses"></div>
-
-		</fieldset>
-
-
-
-
-
-
-
-
-		<fieldset class="form-control form-teachers">
-			<legend>Teachers</legend>
-
-			<div class="form-group">
-				<label for="">Text Box: </label>
-				<span><input type="text" name="txtBox" persist></span>
-			</div>
-			<div class="buttons">
-				<a class="btn btn-danger" id="delete-teachers">Delete Teachers</a>
-				<a class="btn btn-info" id="listing-teachers">Listing Teachers</a>
-				<a class="btn btn-warning" id="create-teachers">Update Teachers</a>
-				<a class="btn btn-success" id="create-teachers">Create Teachers</a>
-			</div>
-
-		</fieldset>
-
-
-
-
-
-
-
-
-		<fieldset class="form-control form-students">
-			<legend>Students</legend>
-
-			<div class="form-group">
-				<label for="">Text Box: </label>
-				<span><input type="text" name="txtBox" persist></span>
-			</div>
-			<div class="buttons">
-				<a class="btn btn-danger" id="delete-students">Delete Students</a>
-				<a class="btn btn-info" id="listing-students">Listing Students</a>
-				<a class="btn btn-warning" id="update-students">Update Students</a>
-				<a class="btn btn-success" id="create-students">Create Students</a>
-			</div>
-
-		</fieldset>
-
-	</form>
 </body>
 </html>

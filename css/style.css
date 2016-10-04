@@ -226,7 +226,8 @@ nav{
 	top: 3px;
 	bottom: 0;
 	left: 0;
-	width: 250px;
+	padding-left: 15px;
+	width: 220px;
 	background-color: #414141;
 	list-style: none;
 	overflow: auto;
@@ -445,6 +446,55 @@ nav li ul li a::before{
 
 /* formulários */
 
+form {
+	width: 60%;
+	position: absolute;
+	left: 250px;
+}
+
+form .form-group {
+	margin: 10px 0;
+}
+
+form .form-group::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+form .form-group label {
+	text-align: right;
+	margin-right: 2%;
+	float: left;
+	width: 28%;
+	min-width: 120px;
+}
+
+form .form-group span {
+	float: left;
+	width: 70%;
+	min-width: 120px;
+}
+
+form .form-group input {
+	width: 100%;
+	background-image: linear-gradient(to bottom, #FFF, #F0F0F0);
+	box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+form .form-group input:focus {
+	width: 100%;
+	background-image: none;
+	background-color: #FFC;
+}
+
+input[type=text] {
+	border: solid 1px #999;
+	border-radius: 5px;
+	height: 25px;
+	margin-bottom: 10px;
+}
+
 form h1{
 	font-size: 26px;
 	margin: 0.67em 0;
@@ -466,6 +516,28 @@ form h1 span::before{
 	margin: 0 10px;
 	font-size: 10px;
 
+}
+
+.classroom {
+	text-align: center;
+	margin: 0 auto;
+	width: 80%;
+	border-radius: 10px;
+	background-color: #FFF;
+	/*background-color: #5cb85c;*/
+}
+
+.classroom img {
+	text-align: center;
+	margin: 0 auto;
+	width: 250px;
+	padding: 10px;
+}
+
+fieldset{
+    margin: 20px;
+    border: none;
+    /*border-radius: 5px;*/
 }
 
 fieldset fieldset{
@@ -1284,6 +1356,7 @@ html .ui-autocomplete { width:1px; z-index: 1} /* without this, the menu expands
 
 
 @media (max-width: 1024px) {
+
 	nav{
 		display: none;
 		position: absolute;
@@ -1323,6 +1396,26 @@ html .ui-autocomplete { width:1px; z-index: 1} /* without this, the menu expands
 		right: 0;
 		bottom: 0;
 	}
+
+	form {
+		width: 70%;
+		left: 100px;
+	}
+	
+	form .form-group span {
+		width: 100%;
+	}
+
+	.classroom {
+		width: 60%;
+		border-radius: 5px;
+	}
+
+	.classroom img {
+		width: 200px;
+		padding: 5px;
+	}
+
 }
 
 @media (max-width: 720px)
@@ -1402,6 +1495,15 @@ html .ui-autocomplete { width:1px; z-index: 1} /* without this, the menu expands
 		text-align: center;
 	}
 
+	form {
+		width: 75%;
+		left: 25px;
+	}
+
+	form .form-group span {
+		width: 100%;
+	}
+
 	form.vertical .input-group label{
 		float: none;
 		max-width: none;
@@ -1410,7 +1512,16 @@ html .ui-autocomplete { width:1px; z-index: 1} /* without this, the menu expands
 		font-size: 12px;
 		line-height: normal;
 	}
+	
+	.classroom {
+		width: 40%;
+		border-radius: 0px;
+	}
 
+	.classroom img {
+		width: 150px;
+		padding: 0px;
+	}
 }
 
 /*Paginação*/
@@ -1472,66 +1583,6 @@ table a:hover {
 	color: red;
 }
 
-form {
-	position: absolute;
-	/*top: 50%;*/
-	margin: 0 15%;
-	margin-top: 5%;
-	width: 70%;
-}
-
-form .form-control {
-	border: 1px solid #000;
-	border-radius: 10px;
-	margin-bottom: 25px;
-	padding: 25px 50px;]
-	width: 100%;
-	box-sizing: border-box;
-}
-
-form .form-group {
-	margin: 10px 0;
-}
-
-form .form-group::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-form .form-group label {
-	text-align: right;
-	margin-right: 2%;
-	float: left;
-	width: 28%;
-	min-width: 120px;
-}
-
-form .form-group span {
-	float: left;
-	width: 70%;
-	min-width: 120px;
-}
-
-form .form-group input {
-	width: 100%;
-	background-image: linear-gradient(to bottom, #FFF, #F0F0F0);
-	box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
-}
-
-form .form-group input:focus {
-	width: 100%;
-	background-image: none;
-	background-color: #FFC;
-}
-
-input[type=text] {
-	border: solid 1px #999;
-	border-radius: 5px;
-	height: 25px;
-	margin-bottom: 10px;
-}
-
 .buttons {
 	text-align: right;
 }
@@ -1542,10 +1593,9 @@ input[type=text] {
 	border: solid 1px #999;
 	background-color: #CCC;
 	color: #FFF;
-	padding: 8px 15px;
+	padding: 12px;
 	cursor: pointer;
 	margin-top: 10px;
-	width: 15px;
 	min-width: 75px;
 	text-align: center;
 }
@@ -1591,39 +1641,22 @@ input[type=text] {
 	background-color: #DDD;
 }   
 
-.classroom {
-	text-align: center;
-	margin: 0 auto;
-	width: 100%;
-	border-radius: 10px;
-	background-color: #FFF;
-	/*background-color: #5cb85c;*/
-}
-
-.classroom img {
-	text-align: center;
-	margin: 0 auto;
-	width: 25%;
-	padding: 10px;
-	border-radius: 20px;
-}
-
 form .form-classes {
-	width: 100%;
+	
 }
 
 form .form-users {
-	width: 100%;
+	
 }
 
 form .form-teachers {
-	width: 100%;
+	
 }
 
 form .form-courses {
-	width: 100%;
+	
 }
 
 form .form-students {
-	width: 100%;
+	
 }
