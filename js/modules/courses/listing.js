@@ -1,5 +1,22 @@
 'use strict';
 $scripts.courses.listing = {
+	properties: {
+		courses: null
+	},
+	template: null,
+	render: function (path) {
+		var _this = this;
+		$.post(path, function (data) {
+			_this.template = _.template(data);
+			_this.update();
+		});
+
+	},
+	update: function(){
+		var tpl = this.template(this.properties);
+		$("#load").html(tpl);
+		this.events();
+	},
 	events: function () {
 		$('#listing-courses').click(function () {
 			$socket.emit('execute', {
@@ -12,19 +29,10 @@ $scripts.courses.listing = {
 }
 
 $socket.on('listingCourseClassroom', function (data) {
-	console.log(data);
 	if (data.error) {
 		alert('Code: ' + data.error.code + ' Message: ' + data.message);
 		return;
 	}
-	var courses = data.courses;
-	var listing = $('#div-listing-courses');
-	var tpl = '';
-
-	for (var i = 0; i < courses.length; i++) {
-		tpl += `<tr><td>${courses[i].id}</td>
-		<td>${courses[i].name}</td></tr>`;
-	}
-	listing.html('<table><tr><th>ID</th><th>Name</th></tr>' + tpl + '</table>');
-	console.log(courses);
+	$scripts.courses.listing.properties.courses = data.courses;
+	$scripts.courses.listing.update();
 });
