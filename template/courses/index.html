@@ -47,25 +47,23 @@ case 'listing':%>
 		<a class="btn btn-info" id="listing-courses">Listing</a>
 	</div>
 
-	<div class="listing" id="div-listing-courses">
-		
-		<%if (courses) {%>
-		<table>
-			<tr>
-				<th>ID</th>
-				<th>Nome</th>
-				<th>DEL</th>
-			</tr>
-		<%for (var i = 0; i < courses.length; i++) { %>
-		<tr>
-			<td><%=courses[i].id%></td>
-			<td><%=courses[i].name%></td>
-			<td><a data-idx="<%=i%>" data-id="<%=courses[i].id%>"> X </a></td>
-		</tr>
-		<%}%>
-		</table>
-		<%}%>
-
+	<div class="list-responsible">
+		<% if (courses && courses.length > 0) { %>
+		<ul data-evt="alterStudent"  >
+			<li class="header">
+				<span class="cell"><%= 'ID' %></span>
+				<span class="cell"><%= 'Name' %></span>
+			</li>
+			<% for(i in courses){ %>
+			<li>
+				<span class="name cell" data-idx="<%= courses[i].id %>"><%= courses[i].id %></span>
+				<span class="name cell" data-idx="<%= courses[i].id %>"><%= courses[i].name %></span>
+			</li>
+			<%}%>
+		</ul>
+		<% } else { %>
+		<span class="inline-alert"><%= 'Nenhum Curso Encontrado' %></span>
+		<% } %>
 	</div>
 
 </fieldset>

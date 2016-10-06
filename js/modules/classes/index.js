@@ -14,7 +14,7 @@ $mods.classes = {
 			_this.update();
 		});
 	},
-	update: function(){
+	update: function(){60
 		var tpl = this.template(this.properties);
 		$("#load").html(tpl);
 		this.events();
