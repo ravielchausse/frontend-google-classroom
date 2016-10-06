@@ -20,30 +20,13 @@
 	<script type="text/javascript" src="js/factory.js"></script>
 
 	<script type="text/javascript" src="js/modules/form.js"></script>
-	<script type="text/javascript" src="js/modules/load.js"></script>
 	<script type="text/javascript" src="js/modules/nav.js"></script>
 
-	<script type="text/javascript" src="js/modules/classes/finalize.js"></script>
-
-	<script type="text/javascript" src="js/modules/users/create.js"></script>
-	<script type="text/javascript" src="js/modules/users/delete.js"></script>
-	<script type="text/javascript" src="js/modules/users/listing.js"></script>
-	<script type="text/javascript" src="js/modules/users/update.js"></script>
-	
-	<script type="text/javascript" src="js/modules/courses/create.js"></script>
-	<script type="text/javascript" src="js/modules/courses/delete.js"></script>
-	<script type="text/javascript" src="js/modules/courses/listing.js"></script>
-	<script type="text/javascript" src="js/modules/courses/update.js"></script>
-
-	<script type="text/javascript" src="js/modules/teachers/create.js"></script>
-	<script type="text/javascript" src="js/modules/teachers/delete.js"></script>
-	<script type="text/javascript" src="js/modules/teachers/listing.js"></script>
-	<script type="text/javascript" src="js/modules/teachers/update.js"></script>
-
-	<script type="text/javascript" src="js/modules/students/create.js"></script>
-	<script type="text/javascript" src="js/modules/students/delete.js"></script>
-	<script type="text/javascript" src="js/modules/students/listing.js"></script>
-	<script type="text/javascript" src="js/modules/students/update.js"></script>
+	<script type="text/javascript" src="js/modules/classes/index.js"></script>
+	<script type="text/javascript" src="js/modules/users/index.js"></script>
+	<script type="text/javascript" src="js/modules/courses/index.js"></script>
+	<script type="text/javascript" src="js/modules/teachers/index.js"></script>
+	<script type="text/javascript" src="js/modules/students/index.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function(){
@@ -56,47 +39,56 @@
 	<div id="all">
 
 		<nav>
+			<div class="profile">
+				<div class="profile_photo"></div>
+				<span class="name">Raviel Chausse Silveira</span>
+				<span class="email">raviel.nf@gmail.com</span>
+				<span class="more">&#xE036;</span>
+			</div>
 			<ul class="no-bullets">
 				<li>
-					<div class="classroom-nav">
-						<a href="index.html"><img src="img/classroom.jpg" alt="Google Classroom"></a>
-					</div>
+					<a href="index.html">Home</a>
 				</li>
-				<li><a href="#">Classes</a>
+				<li>
+					<a href="#">Classes</a>
 					<ul>
-						<li><a href="template/classes/finalize.html" data-cls="classes" data-script="finalize">Finalize</a></li>
+						<li><a data-cls="classes" data-action="finalize">Finalize</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Users</a>
+				<li>
+					<a href="#">Users</a>
 					<ul>
-						<li><a href="template/users/create.html" data-cls="users" data-script="create">Create</a></li>
-						<li><a href="template/users/listing.html" data-cls="users" data-script="listing">Listing</a></li>
-						<li><a href="template/users/update.html" data-cls="users" data-script="update">Update</a></li>
-						<li><a href="template/users/delete.html" data-cls="users" data-script="delete">Delete</a></li>
+						<li><a data-cls="users" data-action="create">Create</a></li>
+						<li><a data-cls="users" data-action="listing">Listing</a></li>
+						<li><a data-cls="users" data-action="update">Update</a></li>
+						<li><a data-cls="users" data-action="delete">Delete</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Courses</a>
+				<li>
+					<a href="#">Courses</a>
 					<ul>
-						<li><a href="template/courses/create.html" data-cls="courses" data-script="create">Create</a></li>
-						<li><a href="template/courses/listing.html" data-cls="courses" data-script="listing">Listing</a></li>
-						<li><a href="template/courses/update.html" data-cls="courses" data-script="update">Update</a></li>
-						<li><a href="template/courses/delete.html" data-cls="courses" data-script="delete">Delete</a></li>
+						<li><a data-cls="courses" data-action="create">Create</a></li>
+						<li><a data-cls="courses" data-action="listing">Listing</a></li>
+						<li><a data-cls="courses" data-action="update">Update</a></li>
+						<li><a data-cls="courses" data-action="delete">Delete</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Teachers</a>
+				<li>
+					<a href="#">Teachers</a>
 					<ul>
-						<li><a href="template/teachers/create.html" data-cls="teachers" data-script="create">Create</a></li>
-						<li><a href="template/teachers/listing.html" data-cls="teachers" data-script="listing">Listing</a></li>
-						<li><a href="template/teachers/update.html" data-cls="teachers" data-script="update">Update</a></li>
-						<li><a href="template/teachers/delete.html" data-cls="teachers" data-script="delete">Delete</a></li>
+						<li><a data-cls="teachers" data-action="create">Create</a></li>
+						<li><a data-cls="teachers" data-action="listing">Listing</a></li>
+						<li><a data-cls="teachers" data-action="update">Update</a></li>
+						<li><a data-cls="teachers" data-action="delete">Delete</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Students</a>
+				<li>
+					<a href="#">Students</a>
 					<ul>
-						<li><a href="template/students/create.html" data-cls="students" data-script="create">Create</a></li>
-						<li><a href="template/students/listing.html" data-cls="students" data-script="listing">Listing</a></li>
-						<li><a href="template/students/update.html" data-cls="students" data-script="update">Update</a></li>
-						<li><a href="template/students/delete.html" data-cls="students" data-script="delete">Delete</a></li>
+						<li><a data-cls="students" data-action="create">Create</a></li>
+						<li><a data-cls="students" data-action="listing">Listing</a></li>
+						<li><a data-cls="students" data-action="update">Update</a></li>
+						<li><a data-cls="students" data-action="delete">Delete</a></li>
 					</ul>
 				</li>
 			</ul>

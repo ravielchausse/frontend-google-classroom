@@ -1,0 +1,93 @@
+<% switch (action) { 
+case 'create':%>
+
+<fieldset class="form-control form-courses">
+	<legend>Courses</legend>
+
+	<div class="form-group">
+		<label for="">Text Box: </label>
+		<span><input type="text" name="txtBox" persist></span>
+	</div>
+	
+	<div class="buttons">
+		<a class="btn btn-success" id="create-courses">Create</a>
+	</div>
+
+</fieldset>
+
+<% break;
+case 'delete':%>
+
+<fieldset class="form-control form-courses">
+	<legend>Courses</legend>
+
+	<div class="form-group">
+		<label for="">Text Box: </label>
+		<span><input type="text" name="txtBox" persist></span>
+	</div>
+	
+	<div class="buttons">
+		<a class="btn btn-danger" id="delete-courses">Delete</a>
+	</div>
+
+</fieldset>
+
+<%break;
+case 'listing':%>
+
+<fieldset class="form-control form-courses">
+	<legend>Courses</legend>
+
+	<div class="form-group">
+		<label for="">Text Box: </label>
+		<span><input type="text" name="txtBox" persist></span>
+	</div>
+	
+	<div class="buttons">
+		<a class="btn btn-info" id="listing-courses">Listing</a>
+	</div>
+
+	<div class="listing" id="div-listing-courses">
+		
+		<%if (courses) {%>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>DEL</th>
+			</tr>
+		<%for (var i = 0; i < courses.length; i++) { %>
+		<tr>
+			<td><%=courses[i].id%></td>
+			<td><%=courses[i].name%></td>
+			<td><a data-idx="<%=i%>" data-id="<%=courses[i].id%>"> X </a></td>
+		</tr>
+		<%}%>
+		</table>
+		<%}%>
+
+	</div>
+
+</fieldset>
+
+<%break;
+case 'update':%>
+
+<fieldset class="form-control form-courses">
+	<legend>Courses</legend>
+
+	<div class="form-group">
+		<label for="">Text Box: </label>
+		<span><input type="text" name="txtBox" persist></span>
+	</div>
+	
+	<div class="buttons">
+		<a class="btn btn-warning" id="create-courses">Update</a>
+	</div>
+
+</fieldset>
+
+<%break;
+default:
+alert('error');
+}%>

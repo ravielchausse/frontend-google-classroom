@@ -2,15 +2,12 @@
 $(document).ready(function(){
 	$('nav ul li a').click(function() {
 		$(this).parent().toggleClass('open');
-		$(this).parent().find('li a').click(function (e) {
-			e.preventDefault();
-			var path = $(this).attr('href');
+		$(this).parent().find('li a').click(function (evt) {
+			evt.preventDefault();
 			var cls = $(this).attr('data-cls');
-			var module = $(this).attr('data-script');
-
-			var script = (cls) ? $scripts[cls][module] : $scripts[module];
-
-			load(path, script);
+			var action = $(this).attr('data-action');
+			var script = $mods[cls];
+			script.render(action);
 		});
 	});
 });
