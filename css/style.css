@@ -36,8 +36,8 @@ body, html{
 	left: 0;
 	bottom: 0;
 	right: 0;
-	/*font-family: "Open Sans";
-	font-size: 14px;*/
+	font-family: "Open Sans";
+	font-size: 14px;
 }
 
 #loading{
@@ -1580,10 +1580,6 @@ html .ui-autocomplete { width:1px; z-index: 1} /* without this, the menu expands
 .paginator-input {
 	padding: 0;
 	text-align: center;
-}
-
-body {
-	font-family: verdana;
 }
 
 a {
