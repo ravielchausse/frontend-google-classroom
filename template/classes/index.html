@@ -7,13 +7,30 @@ case 'finalize':%>
 		<legend>Classes</legend>
 
 		<div class="form-group">
+			<label for="">Create Email: </label>
+			<span>
+				<select name="createEmail" persist>
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</select>
+			</span>
+			<!-- <div class="switch">
+				<input
+				id="cmn-toggle"
+				class="cmn-toggle cmn-toggle-round"
+				name="op"
+				value="1"
+				type="checkbox" persist>
+				<label for="cmn-toggle"></label>
+			</div> -->
+		</div>
+		<div class="form-group">
 			<label for="">ID Class: </label>
-			<span><input type="text" name="id" persist></span>
+			<span><input type="text" name="classId" persist></span>
 		</div>
 		<div class="buttons">
 			<a class="btn btn-success" id="finalize-classes">Finalize</a>
 		</div>
-
 	</fieldset>
 	
 </div>

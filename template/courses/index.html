@@ -22,8 +22,8 @@ case 'delete':%>
 	<legend>Courses</legend>
 
 	<div class="form-group">
-		<label for="">Text Box: </label>
-		<span><input type="text" name="txtBox" persist></span>
+		<label for="">Page Size: </label>
+		<span><input type="text" name="pageSize" persist></span>
 	</div>
 	
 	<div class="buttons">
@@ -33,14 +33,15 @@ case 'delete':%>
 </fieldset>
 
 <%break;
-case 'listing':%>
+case 'listing':
+var x = 0;%>
 
 <fieldset class="form-control form-courses">
 	<legend>Courses</legend>
 
 	<div class="form-group">
-		<label for="">Text Box: </label>
-		<span><input type="text" name="txtBox" persist></span>
+		<label for="">Page Size: </label>
+		<span><input type="text" name="pageSize" persist></span>
 	</div>
 	
 	<div class="buttons">
@@ -48,14 +49,18 @@ case 'listing':%>
 	</div>
 
 	<div class="list-responsible">
-		<% if (courses && courses.length > 0) { %>
+		<% if (courses && courses.length > 0) { 
+		x = 0; %>
 		<ul data-evt="alterStudent"  >
 			<li class="header">
+				<span class="cell"><%= '#' %></span>
 				<span class="cell"><%= 'ID' %></span>
 				<span class="cell"><%= 'Name' %></span>
 			</li>
-			<% for(i in courses){ %>
+			<% for(i in courses){ 
+			x++; %>
 			<li>
+				<span class="name cell" data-idx="<%= courses[i].id %>"><%= x %></span>
 				<span class="name cell" data-idx="<%= courses[i].id %>"><%= courses[i].id %></span>
 				<span class="name cell" data-idx="<%= courses[i].id %>"><%= courses[i].name %></span>
 			</li>

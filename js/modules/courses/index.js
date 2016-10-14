@@ -35,15 +35,16 @@ $mods.courses = {
 			$socket.emit('execute', {
 				cls: 'googleClassroom',
 				action: 'deleteCourseClassroomList',
-				data: {}
+				data: data
 			});
 		});
 
 		$('#listing-courses').click(function () {
+			var data = $('form').getForm();
 			$socket.emit('execute', {
 				cls: 'googleClassroom',
 				action: 'listingCourseClassroom',
-				data: {}
+				data: data
 			});
 		});
 

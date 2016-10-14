@@ -533,16 +533,15 @@ form h1 span::before{
 
 .classroom {
 	text-align: center;
-	margin: 0 auto;
-	width: 80%;
-	border-radius: 10px;
+	margin: 30px auto;
+	width: 70%;
 	background-color: #FFF;
 	/*background-color: #5cb85c;*/
 }
 
 .classroom img {
-	width: 250px;
-	padding: 10px;
+	width: 50%;
+	padding: 25px;
 }
 
 fieldset{
@@ -1648,8 +1647,28 @@ table a:hover {
 	background-color: #DDD;
 }   
 
+
+form .form-classes .form-group select {
+	border: solid 1px #999;
+	border-radius: 5px;
+	height: 25px;
+	margin-bottom: 10px;
+}
+
+form .form-classes .form-group input, select {
+	width: 100%;
+	background-image: linear-gradient(to bottom, #FFF, #F0F0F0);
+	box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+form .form-classes .form-group input:focus {
+	width: 100%;
+	background-image: none;
+	background-color: #FFC;
+}
+
 form .form-classes {
-	
+	width: 50%;
 }
 
 form .form-users {
