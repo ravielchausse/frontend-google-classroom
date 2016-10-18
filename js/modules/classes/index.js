@@ -22,12 +22,12 @@ $mods.classes = {
 	events: function () {
 		$('#finalize-classes').click(function () {
 			var data = $('form').getForm();
-			// $socket.emit('execute', {
-			// 	cls: 'classes',
-			// 	action: 'finalizeClassById',
-			// 	data: data
-			// });
 			console.log({finalize: data});
+			$socket.emit('execute', {
+				cls: 'classes',
+				action: 'finalizeClassById',
+				data: data
+			});
 		});
 	}
 }

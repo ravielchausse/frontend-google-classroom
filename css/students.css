@@ -1,0 +1,236 @@
+/* importação de fontes */
+
+@font-face{
+	font-family: "Open Sans";
+	src: url("../font/OpenSans-Regular.ttf"), local("Arial");
+}
+
+@font-face{
+	font-family: "icons";
+	src: url("../font/icons/new/icons.ttf"),
+	url("../font/icons/new/icons.eot");
+}
+
+@font-face{
+	font-family: "logo";
+	src: url("../font/aaaiight-fat.ttf");
+}
+
+/* estrutura básica */
+*{
+	position: relative;
+}
+
+body, html{
+	height: 100%;
+	margin: 0;
+}
+
+.ico{
+	font-family: "icons";
+}
+
+#all{
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	font-family: "Open Sans";
+	font-size: 14px;
+}
+
+form {
+	margin: 0 auto;
+	width: 800px;
+	position: absolute;
+	left: 250px;
+}
+
+form .title-page {
+	margin: 0 auto;
+	text-align: center;
+}
+
+form .title-page p {
+	font-size: 32px;
+	color: #263585;
+}
+
+form .classroom {
+	margin: 0 auto;
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+form .classroom img{
+	margin: 0 auto;
+	width: 100%;
+}
+
+form .classroom p {
+	font-size: 20px;
+	color: #888;
+}
+
+form .form-group {
+	display: block;
+	width: 40%;
+	background-color: #EDEDED;
+	margin: 0 auto;
+	float: right;
+	padding: 32px;
+}
+
+form .form-group::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+form .form-group label {
+	display: block;
+	font-weight: bold;
+}
+
+form .form-group label.lbl-position {
+	margin-top: 32px;
+}
+
+form .form-group span {
+	display: block;
+	position: relative;
+}
+
+form .form-group span.atgedu {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	color: #999;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	direction: ltr;
+	font-size: 14px;
+}
+
+form .form-group span.atmsg {
+	position: absolute;
+	top: 30px;
+	right: 10px;
+	color: #d9534f;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	direction: ltr;
+	font-size: 12px;
+}
+
+form .form-group input {
+	display: block;
+	width: 100%;
+	background-image: linear-gradient(to bottom, #FFF, #F0F0F0);
+	box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+form .form-group input:focus {
+	width: 100%;
+	background-image: none;
+	background-color: #FFC;
+}
+
+form .footer-page {
+	margin: 0 auto;
+	width: 50%;
+	float: left;
+	text-align: left;
+}
+
+form .footer-page h1 {
+	font-size: 24px;
+	color: #e78639;
+}
+
+form .footer-page p {
+	font-size: 14px;
+	color: #555;
+}
+
+input[type=text] {
+	border: solid 1px #999;
+	border-radius: 5px;
+	height: 25px;
+	margin-bottom: 10px;
+}
+
+input[type=email] {
+	border: solid 1px #999;
+	border-radius: 5px;
+	height: 25px;
+	margin-bottom: 10px;
+}
+
+input[type=password] {
+	border: solid 1px #999;
+	border-radius: 5px;
+	height: 25px;
+	margin-bottom: 10px;
+}
+
+a {
+	cursor: pointer;
+}
+
+table a:hover {
+	color: red;
+}
+
+.buttons {
+	margin-top: 60px;
+	text-align: right;
+}
+
+.btn {
+	display: inline-block;
+	border-radius: 5px;
+	border: solid 1px #999;
+	background-color: #3c80f0;
+	color: #FFF;
+	padding: 12px;
+	cursor: pointer;
+	margin-top: 10px;
+	min-width: 75px;
+	text-align: center;
+}
+
+.btn[disabled] {
+	background-color: #ccc;
+	cursor: default;
+}
+
+.btn:hover::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(255,255,255,0.15);
+}
+
+.btn.btn-success {
+	background-color: #5cb85c;
+}
+
+.btn.btn-info {
+	background-color: #5bc0de;
+}
+
+.btn.btn-warning {
+	background-color: #f0ad4e;
+}
+
+.btn.btn-danger {
+	background-color: #d9534f;
+}

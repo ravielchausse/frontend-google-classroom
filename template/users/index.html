@@ -55,7 +55,28 @@ case 'listing':%>
 		<a class="btn btn-info" id="listing-users">Listing</a>
 	</div>
 
-	<div class="listing" id="div-listing-users"></div>
+	<div class="list-responsible">
+		<% if (users && users.length > 0) { 
+		x = 0; %>
+		<ul data-evt="alterStudent"  >
+			<li class="header">
+				<span class="cell"><%= '#' %></span>
+				<span class="cell"><%= 'ID' %></span>
+				<span class="cell"><%= 'E-mail' %></span>
+			</li>
+			<% for(i in users){ 
+			x++; %>
+			<li>
+				<span class="name cell" data-idx="<%= users[i].id %>"><%= x %></span>
+				<span class="name cell" data-idx="<%= users[i].id %>"><%= users[i].id %></span>
+				<span class="name cell" data-idx="<%= users[i].id %>"><%= users[i].primaryEmail %></span>
+			</li>
+			<%}%>
+		</ul>
+		<% } else { %>
+		<span class="inline-alert"><%= 'Nenhum Usuário Encontrado' %></span>
+		<% } %>
+	</div>
 
 </fieldset>
 

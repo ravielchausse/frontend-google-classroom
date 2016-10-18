@@ -1,0 +1,120 @@
+<!doctype HTML>
+<html>
+<head>
+	<title>TEdu</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/students.css" />
+
+	<script type="text/javascript" src="js/lib/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/lib/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/lib/socket.io.js"></script>
+	
+	<script type="text/javascript" src="js/modules/form.js"></script>
+
+	<script type="text/javascript">
+		var $socket = io('http://127.0.0.1:3000');
+		var courses = null;
+
+		$(document).ready(function(){
+			courses = window.location.search.split("=")[1].split("-");
+			$('#create-student').click(function () {
+				var data = $('form').getForm();
+
+				for (var i in data) {
+					if (!data[i]) {
+						alert(i + ' undefined');
+						return;
+					}
+				}
+
+				if (data.password != data.confirm) {
+					alert('Password Incorrect');
+					return;
+				}
+
+				data.googleEmail += $('.atgedu').attr('title');
+
+				console.log({courses: courses, data: data});
+
+				$socket.emit('execute', {
+					cls: 'googleClassroom',
+					action: 'createUserStudentClassroom',
+					data: {
+						courses: courses,
+						data: data
+					}
+				});
+
+				window.location.href = "https://classroom.google.com/u/2/h";
+
+			});
+		});
+
+		$socket.on('Exceptions', function (data) {
+			console.log(data);
+			alert('Code: ' + data.exception.code + ' Message: ' + data.exception.exceptionMessage);
+		});
+
+		$socket.on('createUserStudentClassroom', function (data) {
+			console.log(data);
+			// if (data.student) {
+			// 	window.location.href = "https://classroom.google.com/u/2/h";
+			// }
+		});
+
+		$socket.on('getUserClassroom', function (data) {
+			console.log(data);
+		});
+
+
+	</script>
+
+</head>
+<body>
+	<div id="all">
+		<form action="#">
+			
+			<div class="title-page">
+				<p>Create Google Classroom Account by @TEdu</p>	
+			</div>
+
+			<div class="classroom">
+				<img src="themes/teducacional/img/teducacional.png" alt="Google Classroom">
+				<p>Take it all with you</p>
+			</div>
+
+			<div class="form-group">
+				<label for="">Name</label>
+				<span><input type="text" placeholder="First" name="givenName" persist></span>
+				<span><input type="text" placeholder="Last" name="familyName" persist></span>
+
+				<label for="" class="lbl-position">Choose your username</label>
+				<span>
+					<input type="text" name="googleEmail" persist>
+					<span class="atgedu" title="@gedu.demo.colegiodoamanha.com.br">@gedu.demo...</span>
+					<!-- <span class="atmsg">User already exists</span> -->
+				</span>
+
+				<label for="" class="lbl-position">Password</label>
+				<span><input type="password" name="password" persist></span>
+
+				<label for="" class="lbl-position">Confirm your password</label>
+				<span><input type="password" name="confirm" persist></span>
+
+				<div class="buttons">
+					<a class="btn" id="create-student" >Create E-mail</a>
+				</div>
+			</div>
+
+			<div class="footer-page">
+				<h1>It's easy -- and free!</h1>
+				<p>Albert Einstein</p>
+				<p>"A Educação é aquilo que resta depois que você esquece o que a escola ensinou."</p>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
