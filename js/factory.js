@@ -10,7 +10,7 @@ $socket.on('log', function (data) {
 
 $socket.on('Exceptions', function (data) {
 	console.log(data);
-	alert('Code: ' + data.exception.code + ' Message: ' + data.exception.exceptionMessage);
+	alert('Message: ' + data.message);
 });
 
 var $mods = $factory.modules;

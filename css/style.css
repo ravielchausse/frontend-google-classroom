@@ -1583,6 +1583,7 @@ html .ui-autocomplete { width:1px; z-index: 1} /* without this, the menu expands
 
 a {
 	cursor: pointer;
+	text-decoration: none;
 }
 
 table a:hover {

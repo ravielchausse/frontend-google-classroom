@@ -58,18 +58,20 @@ case 'listing':%>
 	<div class="list-responsible">
 		<% if (users && users.length > 0) { 
 		x = 0; %>
-		<ul data-evt="alterStudent"  >
+		<ul data-evt="alterStudent" id="delete-users-id">
 			<li class="header">
 				<span class="cell"><%= '#' %></span>
 				<span class="cell"><%= 'ID' %></span>
 				<span class="cell"><%= 'E-mail' %></span>
+				<span class="cell"><%= 'DEL' %></span>
 			</li>
 			<% for(i in users){ 
 			x++; %>
 			<li>
-				<span class="name cell" data-idx="<%= users[i].id %>"><%= x %></span>
-				<span class="name cell" data-idx="<%= users[i].id %>"><%= users[i].id %></span>
-				<span class="name cell" data-idx="<%= users[i].id %>"><%= users[i].primaryEmail %></span>
+				<span class="cell" data-idx="<%= i %>"><%= x %></span>
+				<span class="cell" data-id="<%= users[i].id %>"><%= users[i].id %></span>
+				<span class="cell" data-email="<%= users[i].primaryEmail %>"><%= users[i].primaryEmail %></span>
+				<span class="cell"><a data-id="<%= users[i].id %>"><span class="ico">*</span></a></span>
 			</li>
 			<%}%>
 		</ul>
