@@ -56,22 +56,23 @@ case 'listing':%>
 	</div>
 
 	<div class="list-responsible">
-		<% if (users && users.length > 0) { 
-		x = 0; %>
+		<% if (users && users.length > 0) { %>
 		<ul data-evt="alterStudent" id="delete-users-id">
 			<li class="header">
-				<span class="cell"><%= '#' %></span>
-				<span class="cell"><%= 'ID' %></span>
-				<span class="cell"><%= 'E-mail' %></span>
-				<span class="cell"><%= 'DEL' %></span>
+				<span class="cell"><%= 'Full Name' %></span>
+				<span class="cell"><%= 'Primary E-mail' %></span>
+				<span class="cell"><%= 'Menu' %></span>
 			</li>
-			<% for(i in users){ 
-			x++; %>
+			<% for(i in users){ %>
 			<li>
-				<span class="cell" data-idx="<%= i %>"><%= x %></span>
-				<span class="cell" data-id="<%= users[i].id %>"><%= users[i].id %></span>
+				<span class="cell" data-name="<%= users[i].id %>"><%= users[i].name.fullName %></span>
 				<span class="cell" data-email="<%= users[i].primaryEmail %>"><%= users[i].primaryEmail %></span>
-				<span class="cell"><a data-id="<%= users[i].id %>"><span class="ico">*</span></a></span>
+				<span class="cell">
+					<a class="edit" data-idx="<%= i %>"><span class="ico">W</span></a>
+					<a class="teacher" data-idx="<%= i %>"><span class="ico">&#xE02B;</span></a>
+					<a class="student" data-idx="<%= i %>"><span class="ico">&#xE024;</span></a>
+					<a class="del" data-id="<%= users[i].id %>"><span class="ico">*</span>	</a>
+				</span>
 			</li>
 			<%}%>
 		</ul>
@@ -90,13 +91,13 @@ case 'update':%>
 
 	<div class="form-group">
 		<label for="">ID User: </label>
-		<span><input type="text" name="userId" persist></span>
+		<span><input type="text" name="id" persist value="<%=user.id%>"></span>
 		<label for="">E-mail Google: </label>
-		<span><input type="text" name="googleEmail" persist></span>
+		<span><input type="text" name="googleEmail" persist value="<%=user.primaryEmail%>"></span>
 		<label for="">Given Name: </label>
-		<span><input type="text" name="givenName" persist></span>
+		<span><input type="text" name="givenName" persist value="<%=user.name.givenName%>"></span>
 		<label for="">Family Name: </label>
-		<span><input type="text" name="familyName" persist></span>
+		<span><input type="text" name="familyName" persist value="<%=user.name.familyName%>"></span>
 	</div>
 	
 	<div class="buttons">

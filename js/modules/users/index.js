@@ -2,6 +2,29 @@
 $mods.users = {
 	properties: {
 		users: null,
+		user: {
+			id: null,
+			name: {
+				givenName: null,
+				familyName: null,
+				fullName: null
+			},
+			primaryEmail: null,
+			agreedToTerms: null,
+			changePasswordAtNextLogin: null,
+			creationTime: null,
+			customerId: null,
+			includeInGlobalAddressList: null,
+			ipWhitelisted: null,
+			isAdmin: null,
+			isDelegatedAdmin: null,
+			isMailboxSetup: null,
+			kind: null,
+			lastLoginTime: null,
+			nonEditableAliases: [],
+			emails: [],
+			suspended: false
+		},
 		action: null
 	},
 	template: null,
@@ -64,17 +87,42 @@ $mods.users = {
 			return;
 		});
 
-		$('#delete-users-id').find('a').click(function (evt) {
+		$('#delete-users-id').find('.edit').click(function (evt) {
+			evt.preventDefault();
+			var idx = $(this).attr('data-idx');
+			console.log({idx: idx, edit: $mods.users.properties.users[idx]});
+			$.extend(true, $mods.users.properties.user, $mods.users.properties.users[idx]);
+			$mods.users.properties.action = 'update';
+			$mods.users.update();
+			return;
+		});
+
+		$('#delete-users-id').find('.teacher').click(function (evt) {
+			evt.preventDefault();
+			var idx = $(this).attr('data-idx');
+			console.log({idx: idx, teacher: $mods.users.properties.users[idx]});
+			return;
+		});
+
+		$('#delete-users-id').find('.student').click(function (evt) {
+			evt.preventDefault();
+			var idx = $(this).attr('data-idx');
+			console.log({idx: idx, student: $mods.users.properties.users[idx]});
+			return;
+		});
+
+		$('#delete-users-id').find('.del').click(function (evt) {
 			evt.preventDefault();
 			var id = $(this).attr('data-id');
-			$socket.emit('execute', {
-				cls: 'googleUsers',
-				action: 'deleteUserGoogleById',
-				data: {id: id}
-			});
+			console.log({del: id});
+			// $socket.emit('execute', {
+			// 	cls: 'googleUsers',
+			// 	action: 'deleteUserGoogleById',
+			// 	data: {id: id}
+			// });
 			// $mods.users.properties.users = null;
 			// $mods.users.update();
-			$("li").has($(this)).remove();
+			// $("li").has($(this)).remove();
 			return;
 		});
 	}
