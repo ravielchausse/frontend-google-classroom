@@ -1,16 +1,18 @@
 <% switch (action) { 
-case 'create':%>
+case 'form':%>
 
 <fieldset class="form-control form-courses">
 	<legend>Courses</legend>
 
 	<div class="form-group">
-		<label for="">Text Box: </label>
-		<span><input type="text" name="txtBox" persist></span>
+		<label for="">Section: </label>
+		<span><input type="text" name="section" persist value="<%=course.section%>"></span>
+		<label for="">Name: </label>
+		<span><input type="text" name="name" persist value="<%=course.name%>"></span>
 	</div>
-	
+
 	<div class="buttons">
-		<a class="btn btn-success" id="create-courses">Create</a>
+		<a class="btn btn-<%=(course.id) ? 'warning' : 'success'%>" id="submit-courses"><%=(course.id) ? 'Update' : 'Create'%></a>
 	</div>
 
 </fieldset>
@@ -49,20 +51,23 @@ var x = 0;%>
 	</div>
 
 	<div class="list-responsible">
-		<% if (courses && courses.length > 0) { 
-		x = 0; %>
-		<ul data-evt="alterStudent"  >
+		<% if (courses && courses.length > 0) { %>
+		<ul id="menu-courses">
 			<li class="header">
-				<span class="cell"><%= '#' %></span>
-				<span class="cell"><%= 'ID' %></span>
+				<span class="cell"><%= 'Section' %></span>
 				<span class="cell"><%= 'Name' %></span>
+				<span class="cell"><%= 'Menu' %></span>
 			</li>
-			<% for(i in courses){ 
-			x++; %>
+			<% for(i in courses){ %>
 			<li>
-				<span class="name cell" data-idx="<%= courses[i].id %>"><%= x %></span>
-				<span class="name cell" data-idx="<%= courses[i].id %>"><%= courses[i].id %></span>
-				<span class="name cell" data-idx="<%= courses[i].id %>"><%= courses[i].name %></span>
+				<span class="name cell" data-section="<%= courses[i].section %>"><%= courses[i].section %></span>
+				<span class="name cell" data-name="<%= courses[i].name %>"><%= courses[i].name %></span>
+				<span class="cell">
+					<a class="edit" data-idx="<%= i %>"><span class="ico">W</span></a>
+					<a class="teacher" data-idx="<%= i %>"><span class="ico">&#xE02B;</span></a>
+					<a class="student" data-idx="<%= i %>"><span class="ico">&#xE024;</span></a>
+					<a class="del" data-id="<%= courses[i].id %>"><span class="ico">*</span>	</a>
+				</span>
 			</li>
 			<%}%>
 		</ul>
@@ -74,18 +79,67 @@ var x = 0;%>
 </fieldset>
 
 <%break;
-case 'update':%>
+case 'listing-teachers': %>
 
 <fieldset class="form-control form-courses">
-	<legend>Courses</legend>
+	<legend>Courses - Teachers</legend>
 
-	<div class="form-group">
-		<label for="">Text Box: </label>
-		<span><input type="text" name="txtBox" persist></span>
+	<div class="list-responsible">
+		<% if (teachers && teachers.length > 0) { %>
+		<ul id="menu-teachers">
+			<li class="header">
+				<span class="cell"><%= 'Name' %></span>
+				<span class="cell"><%= 'E-mail Address' %></span>
+				<span class="cell"><%= 'Menu' %></span>
+			</li>
+			<% for(i in teachers){ %>
+			<li>
+				<span class="name cell" data-name="<%= teachers[i].profile.name.fullName %>"><%= teachers[i].profile.name.fullName %></span>
+				<span class="name cell" data-email-address="<%= teachers[i].profile.emailAddress %>"><%= teachers[i].profile.emailAddress %></span>
+				<span class="cell">
+					<a class="del" data-user-id="<%= teachers[i].userId %>" data-course-id="<%= teachers[i].courseId %>">
+						<span class="ico">*</span>	
+					</a>
+				</span>
+			</li>
+			<%}%>
+		</ul>
+		<% } else { %>
+		<span class="inline-alert"><%= 'Nenhum Professor Encontrado' %></span>
+		<% } %>
 	</div>
-	
-	<div class="buttons">
-		<a class="btn btn-warning" id="create-courses">Update</a>
+
+</fieldset>
+
+<%break;
+case 'listing-students': %>
+
+<fieldset class="form-control form-courses">
+	<legend>Courses - Students</legend>
+
+	<div class="list-responsible">
+		<% if (students && students.length > 0) { %>
+		<ul id="menu-students">
+			<li class="header">
+				<span class="cell"><%= 'Name' %></span>
+				<span class="cell"><%= 'E-mail Address' %></span>
+				<span class="cell"><%= 'Menu' %></span>
+			</li>
+			<% for(i in students){ %>
+			<li>
+				<span class="name cell" data-name="<%= students[i].profile.name.fullName %>"><%= students[i].profile.name.fullName %></span>
+				<span class="name cell" data-email-address="<%= students[i].profile.emailAddress %>"><%= students[i].profile.emailAddress %></span>
+				<span class="cell">
+					<a class="del" data-user-id="<%= students[i].userId %>" data-course-id="<%= students[i].courseId %>">
+						<span class="ico">*</span>	
+					</a>
+				</span>
+			</li>
+			<%}%>
+		</ul>
+		<% } else { %>
+		<span class="inline-alert"><%= 'Nenhum Professor Encontrado' %></span>
+		<% } %>
 	</div>
 
 </fieldset>

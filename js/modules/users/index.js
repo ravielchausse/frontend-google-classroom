@@ -1,19 +1,16 @@
 'use strict';
 $mods.users = {
 	properties: {
+		cls: 'googleUsers',
+		action: null,
 		users: null,
 		user: {
-			id: null,
-			name: {
-				givenName: null,
-				familyName: null,
-				fullName: null
-			},
-			primaryEmail: null,
 			agreedToTerms: null,
 			changePasswordAtNextLogin: null,
 			creationTime: null,
 			customerId: null,
+			emails: [],
+			id: null,
 			includeInGlobalAddressList: null,
 			ipWhitelisted: null,
 			isAdmin: null,
@@ -21,11 +18,15 @@ $mods.users = {
 			isMailboxSetup: null,
 			kind: null,
 			lastLoginTime: null,
+			name: {
+				givenName: null,
+				familyName: null,
+				fullName: null
+			},
 			nonEditableAliases: [],
-			emails: [],
+			primaryEmail: null,
 			suspended: false
-		},
-		action: null
+		}
 	},
 	template: null,
 	templatePath: "template/users/index.html",
@@ -45,94 +46,79 @@ $mods.users = {
 		return;
 	},
 	events: function () {
-		$('#create-users').click(function () {
-			var data = $('form').getForm();
-			$socket.emit('execute', {
-				cls: 'googleUsers',
-				action: 'createUserGoogle',
-				data: data
-			});
-			return;
-		});
+		$('#submit-users').click(function () {
+			var user = $('form').getForm();
 
-		$('#delete-users').click(function () {
-			var data = $('form').getForm();
-			$socket.emit('execute', {
-				cls: 'googleUsers',
-				action: 'deleteUserGoogle',
-				data: {
-					
-				}
-			});
+			$.extend(true, $mods.users.properties.user, user);
+
+			console.log({user: $mods.users.properties.user});
+			if ($mods.users.properties.user.id) {
+				$socket.emit('execute', {
+					cls: $mods.users.properties.cls,
+					action: 'updateUserGoogle',
+					data: $mods.users.properties.user
+				});
+			} else {
+				$socket.emit('execute', {
+					cls: $mods.users.properties.cls,
+					action: 'createUserGoogle',
+					data: $mods.users.properties.user
+				});
+			}
 			return;
 		});
 
 		$('#listing-users').click(function () {
 			var data = $('form').getForm();
 			$socket.emit('execute', {
-				cls: 'googleUsers',
+				cls: $mods.users.properties.cls,
 				action: 'listingUserGoogle',
 				data: data
 			});
 			return;
 		});
 
-		$('#update-users').click(function () {
-			var data = $('form').getForm();
-			$socket.emit('execute', {
-				cls: 'googleUsers',
-				action: 'updateUserGoogle',
-				data: data
-			});
-			return;
-		});
-
-		$('#delete-users-id').find('.edit').click(function (evt) {
+		$('#menu-users').find('.edit').click(function (evt) {
 			evt.preventDefault();
 			var idx = $(this).attr('data-idx');
-			console.log({idx: idx, edit: $mods.users.properties.users[idx]});
 			$.extend(true, $mods.users.properties.user, $mods.users.properties.users[idx]);
-			$mods.users.properties.action = 'update';
+			$mods.users.properties.action = 'form';
 			$mods.users.update();
 			return;
 		});
 
-		$('#delete-users-id').find('.teacher').click(function (evt) {
+		$('#menu-users').find('.teacher').click(function (evt) {
 			evt.preventDefault();
 			var idx = $(this).attr('data-idx');
-			console.log({idx: idx, teacher: $mods.users.properties.users[idx]});
+			$.extend(true, $mods.teachers.properties.teacher, $mods.users.properties.users[idx]);
+			$mods.teachers.render('create');
 			return;
 		});
 
-		$('#delete-users-id').find('.student').click(function (evt) {
+		$('#menu-users').find('.student').click(function (evt) {
 			evt.preventDefault();
 			var idx = $(this).attr('data-idx');
-			console.log({idx: idx, student: $mods.users.properties.users[idx]});
+			console.log({student: $mods.users.properties.users[idx]});
 			return;
 		});
 
-		$('#delete-users-id').find('.del').click(function (evt) {
+		$('#menu-users').find('.del').click(function (evt) {
 			evt.preventDefault();
 			var id = $(this).attr('data-id');
-			console.log({del: id});
-			// $socket.emit('execute', {
-			// 	cls: 'googleUsers',
-			// 	action: 'deleteUserGoogleById',
-			// 	data: {id: id}
-			// });
-			// $mods.users.properties.users = null;
-			// $mods.users.update();
-			// $("li").has($(this)).remove();
+			$socket.emit('execute', {
+				cls: $mods.users.properties.cls,
+				action: 'deleteUserGoogleById',
+				data: {id: id}
+			});
+			$mods.users.properties.users = null;
+			$mods.users.update();
+			$("li").has($(this)).remove();
 			return;
 		});
 	}
 }
 
 $socket.on('createUserGoogle', function (data) {
-	console.log(data);
-});
-
-$socket.on('deleteUserGoogle', function (data) {
 	console.log(data);
 });
 
@@ -143,16 +129,21 @@ $socket.on('deleteUserGoogleById', function (data) {
 });
 
 $socket.on('listingUserGoogle', function (data) {
-	console.log(data);
 	$mods.users.properties.users = data.users;
 	$mods.users.update();
 });
 
 $socket.on('updateUserGoogle', function (data) {
-	console.log(data);
 	$('.form-users').find('input').each(function () {
 		$(this).val(null);
 	});
 	$('#div-listing-users').html('');
 	alert(data.message);
+	$mods.users.properties.action = 'listing';
+	$mods.users.properties.users = null;
+	$mods.users.update();
+});
+
+$socket.on('listingTeacherClassroom', function (data) {
+	console.log({teachers: data});
 });

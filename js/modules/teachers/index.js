@@ -1,8 +1,12 @@
 'use strict';
 $mods.teachers = {
 	properties: {
+		cls: 'googleClassroom',
+		action: null,
+		courses: null,
+		course: {},
 		teachers: null,
-		action: null
+		teacher: {}
 	},
 	template: null,
 	templatePath: "template/teachers/index.html",
@@ -21,91 +25,34 @@ $mods.teachers = {
 	},
 	events: function () {
 		$('#create-teachers').click(function () {
-			var data = $('form').getForm();
-			console.log(data);
+			var course = $('form').getForm();
+			$.extend(true, $mods.teachers.properties.course, $mods.teachers.properties.courses[course.idx]);
 			$socket.emit('execute', {
-				cls: 'googleClassroom',
-				action: 'createTeacherClassroom',
-				data: {
-					courseId: data.courseId,
-					personData: data
-				}
+				cls: $mods.teachers.properties.cls,
+				action: 'createTeacherByCourseId',
+				data: {courseId: $mods.teachers.properties.course.id, userId: $mods.teachers.properties.teacher.id}
 			});
 		});
 
-		$('#delete-teachers').click(function () {
-			var data = $('form').getForm();
+		$('#listing-courses').click(function () {
 			$socket.emit('execute', {
-				cls: 'googleClassroom',
-				action: 'deleteTeacherClassroom',
-				data: {}
-			});
-		});
-
-		$('#listing-teachers').click(function () {
-			var data = $('form').getForm();
-			$socket.emit('execute', {
-				cls: 'googleClassroom',
-				action: 'listingTeacherClassroom',
-				data: data
-			});
-		});
-
-		$('#update-teachers').click(function () {
-			var data = $('form').getForm();
-			$socket.emit('execute', {
-				cls: 'googleClassroom',
-				action: 'updateTeacherClassroom',
-				data: data
+				cls: $mods.teachers.properties.cls,
+				action: 'listingCourseForTeachers',
+				data: {pageSize: 50}
 			});
 		});
 	}
 }
 
-$socket.on('createTeacherClassroom', function (data) {
-	console.log(data);
-});
-
-$socket.on('deleteTeacherClassroom', function (data) {
-	console.log(data);
-});
-
-$socket.on('listingTeacherClassroom', function (data) {
-	console.log(data);
-	if (data.error) {
-		alert('Code: ' + data.error.code + ' Message: ' + data.message);
-		return;
-	}
-	var teachers = data.teachers;
-	var listing = $('#div-listing-teachers');
-	var tpl = '';
-
-	for (var i = 0; i < teachers.length; i++) {
-		tpl += `<tr>
-		<td>${teachers[i].profile.name.fullName}</td>
-		<td>${teachers[i].profile.emailAddress}</td>
-		<td><a data-course-id="${teachers[i].courseId}" data-user-id="${teachers[i].profile.id}"> X </a></td></tr>`;
-	}
-	listing.html('<table><tr><th>Name</th><th>E-mail</th><th>DEL</th></tr>' + tpl + '</table>').find('a').click(function () {
-		var data = {
-			courseId: $(this).attr('data-course-id'),
-			userId: $(this).attr('data-user-id')
-		};
-		console.log(data);
-		$socket.emit('execute', {
-			cls: 'googleClassroom',
-			action: 'deleteTeacherClassroomById',
-			data: data
-		});
+$socket.on('createTeacherByCourseId', function (data) {
+	$socket.emit('execute', {
+		cls: $mods.courses.properties.cls,
+		action: 'listingTeacherByCourseId',
+		data: {courseId: $mods.teachers.properties.course.id}
 	});
-	console.log(teachers);
 });
 
-$socket.on('updateTeacherClassroom', function (data) {
-	console.log(data);
-	$('.form-teachers').find('input').each(function () {
-		$(this).val(null);
-	});
-	$('#div-listing-teachers').html('');
-	alert(data.message);
+$socket.on('listingCourseForTeachers', function (data) {
+	$mods.teachers.properties.courses = data.courses;
+	$mods.teachers.update();
 });

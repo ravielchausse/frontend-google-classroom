@@ -476,7 +476,7 @@ form .form-group span {
 	min-width: 120px;
 }
 
-form .form-group input {
+form .form-group input, select {
 	width: 100%;
 	background-image: linear-gradient(to bottom, #FFF, #F0F0F0);
 	box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
@@ -488,7 +488,7 @@ form .form-group input:focus {
 	background-color: #FFC;
 }
 
-input[type=text] {
+select, input[type=text] {
 	border: solid 1px #999;
 	border-radius: 5px;
 	height: 25px;

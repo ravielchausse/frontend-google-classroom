@@ -5,81 +5,25 @@ case 'create':%>
 	<legend>Teachers</legend>
 
 	<div class="form-group">
-		<label for="">Course ID: </label>
-		<span><input type="text" name="courseId" persist></span>
-		<label for="">E-mail: </label>
-		<span><input type="text" name="googleEmail" persist></span>
-		<label for="">Page Size: </label>
-		<span><input type="text" name="pageSize" persist></span>
+		<div class="form-group">
+			<label for="">Courses: </label>
+			<span>
+				<select name="idx" persist>
+					<% if (courses && courses.length > 0) { %>
+					<% for(i in courses){ %>
+					<option value="<%= i %>"><%= courses[i].name %></option>
+					<%}%>
+					<% } else { %>
+					<option value="null"><%= 'Nenhum Curso Encontrado' %></option>
+					<% } %>
+				</select>
+			</span>
+		</div>
 	</div>
 	
 	<div class="buttons">
+		<a class="btn btn-info" id="listing-courses">Listing Courses</a>
 		<a class="btn btn-success" id="create-teachers">Create</a>
-	</div>
-
-</fieldset>
-
-<% break;
-case 'delete':%>
-
-<fieldset class="form-control form-teachers">
-	<legend>Teachers</legend>
-
-	<div class="form-group">
-		<label for="">Course ID: </label>
-		<span><input type="text" name="courseId" persist></span>
-		<label for="">E-mail: </label>
-		<span><input type="text" name="googleEmail" persist></span>
-		<label for="">Page Size: </label>
-		<span><input type="text" name="pageSize" persist></span>
-	</div>
-	
-	<div class="buttons">
-		<a class="btn btn-danger" id="delete-teachers">Delete</a>
-	</div>
-
-</fieldset>
-
-<%break;
-case 'listing':%>
-
-<fieldset class="form-control form-teachers">
-	<legend>Teachers</legend>
-
-	<div class="form-group">
-		<label for="">Course ID: </label>
-		<span><input type="text" name="courseId" persist></span>
-		<label for="">E-mail: </label>
-		<span><input type="text" name="googleEmail" persist></span>
-		<label for="">Page Size: </label>
-		<span><input type="text" name="pageSize" persist></span>
-	</div>
-
-	<div class="buttons">
-		<a class="btn btn-info" id="listing-teachers">Listing</a>
-	</div>
-
-	<div class="listing" id="div-listing-teachers"></div>
-
-</fieldset>
-
-<%break;
-case 'update':%>
-
-<fieldset class="form-control form-teachers">
-	<legend>Teachers</legend>
-
-	<div class="form-group">
-		<label for="">Course ID: </label>
-		<span><input type="text" name="courseId" persist></span>
-		<label for="">E-mail: </label>
-		<span><input type="text" name="googleEmail" persist></span>
-		<label for="">Page Size: </label>
-		<span><input type="text" name="pageSize" persist></span>
-	</div>
-	
-	<div class="buttons">
-		<a class="btn btn-warning" id="update-teachers">Update</a>
 	</div>
 
 </fieldset>
